@@ -1,0 +1,82 @@
+body{
+    
+}
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+html {
+font-family: "Montserrat", sans-serif;
+}
+section {
+    background-image: linear-gradient( to bottom right, rgba(39,55,59,1.0),rgba(114,82,104));
+min-height: 100vh;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.container {
+width: 90%;
+max-width: 400px;
+background-color: rgb(39, 55, 59);
+border-radius: 8px;
+overflow: hidden;
+}
+.display {
+background-color: rgb(231, 216, 226);
+height: 100px;
+width: 100%;
+text-align: right;
+padding: 20px;
+font-size: 30px;
+position: relative;
+}
+.display-1 {
+opacity: 0.4;
+font-size: 20px;
+height: 20px;
+overflow: hidden;
+}
+.temp-result {
+position: absolute;
+bottom: 0;
+left: 10;
+font-size: 20px;
+opacity: 0.3;
+}
+.all_button {
+display: flex;
+flex-direction: column;
+}
+.ligne{
+    color: whitesmoke;
+    display: flex;
+    flex-direction: row;
+}
+
+.button {
+border: 0.5px solid rgba(92, 92, 92, 0.137);
+border-radius: 50px;
+margin: 2px;
+margin-right: 2px;
+display: inline-block;
+height: 100px;
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 30px;
+cursor: pointer;
+box-shadow: 0 0 30px #000;
+}
+.color_dif{
+    background-color: rgb(87, 59, 78);
+}
+.button:hover {
+background-color: rgb(155, 113, 141);
+}
+.btn-0 {
+grid-column: 1/3;
+}
