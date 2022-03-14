@@ -1,40 +1,48 @@
-
 const affich1 = document.querySelector(".display-1");
 const affich2 = document.querySelector(".display-2");
 const affichResult = document.querySelector(".temp-result");
-const numbersEl = document.querySelectorAll(".number");
-const operationEl = document.querySelectorAll(".operation");
-const equalEl = document.querySelector(".equal");
+const numbers = document.querySelectorAll(".number");
+const operations = document.querySelectorAll(".operation");
+const equal = document.querySelector(".equal");
 const clearAllEl = document.querySelector(".all-clear");
 const clearLastEl = document.querySelector(".last-entity-clear");
-let dis1Num = "";
-let dis2Num = "";
+let num1 = "";
+let num2 = "";
 let result = null;
 let lastOperation = "";
-let haveDot = false;
+let virguleFlott = false;
+let moin=false
 
-numbersEl.forEach((number) => {
+numbers.forEach((number) => {
   number.addEventListener("click", (e) => {
-    if (e.target.innerText === "." && !haveDot) {
-      haveDot = true;
-    } else if (e.target.innerText === "." && haveDot) {
+     if (e.target.innerText ==="0"  && !num2) 
       return;
+      else if (e.target.innerText === "-" && !moin) 
+        moin=true
+   else if (e.target.innerText === "." && !virguleFlott) {
+      virguleFlott = true;
     }
-    dis2Num += e.target.innerText;
-    affich2.innerText = dis2Num;
+      
+    else if (e.target.innerText ==="-" && moin || e.target.innerText ==="." && virguleFlott  )
+    return
+    num2 += e.target.innerText;
+    affich2.innerText = num2;
     // console.log();
+   
+    
   });
 });
 
-operationEl.forEach((operation) => {
+operations.forEach((operation) => {
   operation.addEventListener("click", (e) => {
-    if (!dis2Num) return;
-    haveDot = false;
+    if (!num2) return;
+    virguleFlott = false;
+    moin=false
     const operationName = e.target.innerText;
-    if (dis1Num && dis2Num && lastOperation) {
+    if (num1 && num2 && lastOperation) {
       mathOperation();
     } else {
-      result = parseFloat(dis2Num);
+      result = parseFloat(num2);
     }
     clearVar(operationName);
     lastOperation = operationName;
@@ -42,33 +50,33 @@ operationEl.forEach((operation) => {
   });
 });
 function clearVar(name = "") {
-  dis1Num += dis2Num + " " + name + " ";
-  affich1.innerText = dis1Num;
+  num1 += num2 + " " + name + " ";
+  affich1.innerText = num1;
   affich2.innerText = "";
-  dis2Num = "";
+  num2 = "";
   affichResult.innerText = result;
 }
 
 function mathOperation() {
     switch(lastOperation){
         case 'x':{
-            result = multiplier(parseFloat(result), parseFloat(dis2Num));
+            result = multiplier(parseFloat(result), parseFloat(num2));
             break;
         }
         case '+':{
-            result = additionner(parseFloat(result), parseFloat(dis2Num));
+            result = additionner(parseFloat(result), parseFloat(num2));
             break;
         }
         case '-':{
-            result = soustraire(parseFloat(result), parseFloat(dis2Num));
+            result = soustraire(parseFloat(result), parseFloat(num2));
             break;
         }
         case '%':{
-            result = modulo(parseFloat(result), parseFloat(dis2Num));
+            result = modulo(parseFloat(result), parseFloat(num2));
             break;
         }
         case '/':{
-            result = diviser(parseFloat(result), parseFloat(dis2Num));
+            result = diviser(parseFloat(result), parseFloat(num2));
             break;
         }
     }
@@ -88,27 +96,30 @@ const modulo = (nbr1, nbr2) => {
 // operation();
 
 
-equalEl.addEventListener("click", () => {
-  if (!dis2Num || !dis1Num) return;
-  haveDot = false;
+equal.addEventListener("click", () => {
+  if (!num2 || !num1) return;
+  virguleFlott = false;
+  moin=false
   mathOperation();
   clearVar();
   affich2.innerText = result;
   affichResult.innerText = "";
-  dis2Num = result;
-  dis1Num = "";
+  num2 = result;
+  num1 = "";
 });
 
 clearAllEl.addEventListener("click", () => {
-  dis1Num = "";
-  dis2Num = "";
-  affich1.innerText = "";
-  affich2.innerText = "";
+  virguleFlott = false;
+  moin=false
+  num1 = "";
+  num2 = "";
+  affich1.innerText = "0";
+  affich2.innerText = "0";
   result = "";
-  affichResult.innerText = "";
+  affichResult.innerText = "0";
 });
 
 clearLastEl.addEventListener("click", () => {
   affich2.innerText = "";
-  dis2Num = "";
+  num2 = "";
 });
